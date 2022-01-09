@@ -30,7 +30,7 @@ function animaisComNomeOrdenado() {
     return ({ ...acc, [local.location]: obj });
   }, {});
 }
-console.log(animaisComNomeOrdenado().NE)
+console.log(animaisComNomeOrdenado());
 
 function getAnimalMap(options) {
   if (options === undefined || !options.includeNames) {
@@ -43,5 +43,5 @@ function getAnimalMap(options) {
   if (options.includeNames && options.sorted) return animaisComNomeOrdenado();
 }
 
-console.log(getAnimalMap({ includeNames: true, sorted: true }));
+console.log(getAnimalMap({ includeNames: true }));
 module.exports = getAnimalMap;
