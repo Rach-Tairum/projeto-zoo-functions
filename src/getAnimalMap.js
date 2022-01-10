@@ -9,11 +9,11 @@ function animalRegiao(local) {
 function animalNames(animal) {
   const primeiroPasso = species.find((element) => element.name === animal);
   const { residents } = primeiroPasso;
-  const segundoPasso = residents.map((elemento) => elemento.name);
+  const segundoPasso = residents.reduce((acc, elemento) => [...acc, elemento.name], []);
   return segundoPasso;
 }
 
-function animaisComNome() {
+function animaisComNomePorRegiao() {
   return species.reduce((acc, local) => {
     const obj = animalRegiao(local.location).map(
       (elemento) => ({ [elemento]: animalNames(elemento) }),
@@ -21,6 +21,8 @@ function animaisComNome() {
     return ({ ...acc, [local.location]: obj });
   }, {});
 }
+
+console.log(animaisComNomePorRegiao());
 
 function animaisComNomeOrdenado() {
   return species.reduce((acc, local) => {
@@ -33,15 +35,15 @@ function animaisComNomeOrdenado() {
 console.log(animaisComNomeOrdenado());
 
 function getAnimalMap(options) {
-  if (options === undefined || !options.includeNames) {
-    const animaisPorRegiao = species.reduce(
-      (acc, local) => ({ ...acc, [local.location]: animalRegiao(local.location) }), {},
-    );
-    return animaisPorRegiao;
-  }
-  if (options.includeNames) return animaisComNome();
-  if (options.includeNames && options.sorted) return animaisComNomeOrdenado();
+//   if (options === undefined || !options.includeNames) {
+//     const animaisPorRegiao = species.reduce(
+//       (acc, local) => ({ ...acc, [local.location]: animalRegiao(local.location) }), {},
+//     );
+//     return animaisPorRegiao;
+//   }
+//   if (options.includeNames) return animaisComNomePorRegiao();
+//   if (options.includeNames && options.sorted) return animaisComNomeOrdenado();
 }
 
-console.log(getAnimalMap({ includeNames: true }));
+// console.log(getAnimalMap({ includeNames: true }));
 module.exports = getAnimalMap;
