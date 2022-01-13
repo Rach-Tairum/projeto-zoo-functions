@@ -1,25 +1,18 @@
 const { employees, species } = require('../data/zoo_data');
 
-function speciesName(responsavel) { // Capta o nome das espécies
+function speciesNameOrLocation(responsavel, objetivo) { // Capta o nome das espécies
   const Z = responsavel.reduce((acc, id) => {
-    const X = species.find((elemento) => elemento.id === id).name;
+    const X = species.find((elemento) => elemento.id === id)[objetivo];
     return [...acc, X];
   }, []);
   return Z;
-}
-function speciesLocation(especies) { // Capta o local das espécies
-  const Y = especies.reduce((acc, id) => {
-    const X = species.find((elemento) => elemento.id === id).location;
-    return [...acc, X];
-  }, []);
-  return Y;
 }
 
 function todosOsFuncionarios() { // Array de todos os funcionários, com id, nome completo, especies q cuida e localização das mesmas.
   const funcionarios = employees.reduce((acc, { id, firstName, lastName, responsibleFor }) => {
     const pessoa = { id, fullName: `${firstName} ${lastName}` };
-    const responsabilidades = { species: speciesName(responsibleFor) };
-    const locais = { locations: speciesLocation(responsibleFor) };
+    const responsabilidades = { species: speciesNameOrLocation(responsibleFor, 'name') };
+    const locais = { locations: speciesNameOrLocation(responsibleFor, 'location') };
 
     const funcionario = { ...pessoa, ...responsabilidades, ...locais };
 
