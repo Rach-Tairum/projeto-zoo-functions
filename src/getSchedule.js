@@ -38,4 +38,6 @@ function getSchedule(scheduleTarget) {
 
   if (scheduleTarget === animalCerto) return animalDisponivel;
 }
+console.log(getSchedule());
+
 module.exports = getSchedule;
